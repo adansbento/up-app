@@ -1,8 +1,9 @@
 # Como rodar a aplicação
 
 - cd up-app
-- ./mvnw.cmd spring-boot:run
-- docker-compose.exe up
+- docker-compose up
+- mvn spring-boot:run
+
 
 ## Stack
 - Java 17
