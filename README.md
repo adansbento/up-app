@@ -1,6 +1,6 @@
 # Como rodar a aplicação
 
-+++cd up-app
+cd up-app
 ./mvnw.cmd spring-boot:run
 docker-compose.exe up
 
