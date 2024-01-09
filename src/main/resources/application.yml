@@ -1,0 +1,14 @@
+spring.jpa:
+  database: POSTGRESQL
+  hibernate.ddl-auto: create-drop
+  show-sql: true
+
+spring.datasource:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/updb
+  username: upuser
+  password: uppassword
+spring:
+  sql:
+    init:
+      platform: postgres
