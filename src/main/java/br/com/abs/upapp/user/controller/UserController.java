@@ -1,9 +1,9 @@
 package br.com.abs.upapp.user.controller;
 
 
-import br.com.abs.upapp.exceptions.UserNotFoundException;
-import br.com.abs.upapp.user.service.UserService;
 import br.com.abs.upapp.user.dto.UserDto;
+import br.com.abs.upapp.user.exceptions.UserNotFoundException;
+import br.com.abs.upapp.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +20,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping()
     public void create(@RequestBody UserDto userDto){
         userService.create(userDto);
     }
-    @RequestMapping(method = RequestMethod.GET,path = "{idUser}")
+    @GetMapping(path = "{idUser}")
     public UserDto findById(@PathVariable  Long idUser) throws UserNotFoundException {
         return userService.findById(idUser);
     }
-    @RequestMapping(method = RequestMethod.GET)
+    @DeleteMapping(path = "{idUser}")
+    public void delete(@PathVariable  Long idUser) throws UserNotFoundException {
+        userService.delete(idUser);
+    }
+    @GetMapping()
     public List<UserDto> findAll(){
         return  userService.findAll();
     }
