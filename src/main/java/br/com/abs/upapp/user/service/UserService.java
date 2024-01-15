@@ -11,6 +11,5 @@ public interface UserService {
     void create(UserDto userDto);
     UserDto findById(Long idUser) throws UserNotFoundException;
     List<UserDto> findAll();
-
     void delete(Long idUser) throws UserNotFoundException;
 }

@@ -1,6 +1,6 @@
 package br.com.abs.upapp.portfolio.dto;
 
-import br.com.abs.upapp.asserts.dto.AssertDto;
+import br.com.abs.upapp.assets.dto.AssetDto;
 import br.com.abs.upapp.portfolio.entity.ItemPortfolio;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,13 +14,13 @@ public class ItemPortfolioDto {
     private Long id;
     private Integer amount;
     private PortfolioDto portfolio;
-    private AssertDto anAssert;
+    private AssetDto asset;
 
 
     public ItemPortfolioDto(ItemPortfolio itemPortfolio) {
         this.id = itemPortfolio.getId();
         this.amount = itemPortfolio.getAmount();
-        this.portfolio = new PortfolioDto(itemPortfolio.getPortfolio());
-        this.anAssert = new AssertDto(itemPortfolio.getAnAssert());
+        //this.portfolio = new PortfolioDto(itemPortfolio.getPortfolio());
+        this.asset = new AssetDto(itemPortfolio.getAsset());
     }
 }

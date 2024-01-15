@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,12 +22,12 @@ public class Portfolio {
     @Column(nullable = false)
     private String description;
 
-    @JoinColumn(name = "id_user",nullable = false)
     @ManyToOne
+    @JoinColumn(name = "id_user",nullable = false)
     private User owner;
 
-    @OneToMany(mappedBy = "portfolio",fetch = FetchType.LAZY)
-    private List<ItemPortfolio> itemPortfolios = new ArrayList<>();
+    @OneToMany(mappedBy = "portfolio",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<ItemPortfolio> itemPortfolios;
 
     public Portfolio(PortfolioDto portfolioDto) {
 

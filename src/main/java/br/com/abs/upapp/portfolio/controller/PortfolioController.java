@@ -5,6 +5,7 @@ import br.com.abs.upapp.portfolio.dto.PortfolioDto;
 import br.com.abs.upapp.portfolio.exceptions.PortfolioNotFoundException;
 import br.com.abs.upapp.portfolio.service.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class PortfolioController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody PortfolioDto portfolioDto){
         portfolioService.create(portfolioDto);
     }

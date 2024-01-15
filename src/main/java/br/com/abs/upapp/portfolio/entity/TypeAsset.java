@@ -1,6 +1,6 @@
 package br.com.abs.upapp.portfolio.entity;
 
-public enum TypeAssert {
+public enum TypeAsset {
     STOCK,
     CRYTO,
     INDEX

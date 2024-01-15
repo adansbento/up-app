@@ -5,6 +5,7 @@ import br.com.abs.upapp.user.dto.UserDto;
 import br.com.abs.upapp.user.exceptions.UserNotFoundException;
 import br.com.abs.upapp.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,11 +22,12 @@ public class UserController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody UserDto userDto){
         userService.create(userDto);
     }
     @GetMapping(path = "{idUser}")
-    public UserDto findById(@PathVariable  Long idUser) throws UserNotFoundException {
+    public UserDto findById(@PathVariable Long idUser) throws UserNotFoundException {
         return userService.findById(idUser);
     }
     @DeleteMapping(path = "{idUser}")

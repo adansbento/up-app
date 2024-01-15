@@ -1,6 +1,6 @@
 package br.com.abs.upapp.exceptions;
 
-import br.com.abs.upapp.asserts.exceptions.AssertNotFoundException;
+import br.com.abs.upapp.assets.exceptions.AssetNotFoundException;
 import br.com.abs.upapp.portfolio.exceptions.PortfolioNotFoundException;
 import br.com.abs.upapp.user.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -44,8 +44,8 @@ public class CustomizeResponseEntityExceptionHandler extends ResponseEntityExcep
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(AssertNotFoundException.class)
-    public final ResponseEntity<ExceptionResponse> handleAssertNotFoundException(Exception ex, WebRequest webRequest){
+    @ExceptionHandler(AssetNotFoundException.class)
+    public final ResponseEntity<ExceptionResponse> handleAssetNotFoundException(Exception ex, WebRequest webRequest){
 
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse(new Date(), ex.getMessage(),webRequest.getDescription(false));

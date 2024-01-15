@@ -1,6 +1,6 @@
 package br.com.abs.upapp.portfolio.entity;
 
-import br.com.abs.upapp.asserts.entity.Assert;
+import br.com.abs.upapp.assets.entity.Asset;
 import br.com.abs.upapp.portfolio.dto.ItemPortfolioDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,18 +19,18 @@ public class ItemPortfolio {
 
     private Integer amount;
 
-    @JoinColumn(name = "id_portfolio", nullable = false)
     @ManyToOne
+    @JoinColumn(name = "id_portfolio")
     private Portfolio portfolio;
 
-    @JoinColumn(name = "id_assert",nullable = false)
     @ManyToOne
-    private Assert anAssert;
+    @JoinColumn(name = "asset_code",nullable = false)
+    private Asset asset;
 
     public ItemPortfolio(ItemPortfolioDto itemPortfolioDto) {
         this.id = itemPortfolioDto.getId();
         this.amount = itemPortfolioDto.getAmount();
-        this.portfolio = new Portfolio(itemPortfolioDto.getPortfolio());
-        this.anAssert = new Assert(itemPortfolioDto.getAnAssert());
+       // this.portfolio = new Portfolio(itemPortfolioDto.getPortfolio());
+        this.asset = new Asset(itemPortfolioDto.getAsset());
     }
 }
