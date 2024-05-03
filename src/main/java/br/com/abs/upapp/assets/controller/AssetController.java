@@ -29,8 +29,7 @@ public class AssetController {
 
     @PutMapping(path = "{idAsset}")
     public void update(@RequestBody AssetDto assetDto,@PathVariable  Long idAsset){
-        assetDto.setId(idAsset);
-        assetService.update(assetDto);
+        assetService.update(assetDto,idAsset);
     }
 
     @GetMapping(path = "{idAsset}")

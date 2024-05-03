@@ -1,9 +1,11 @@
-package br.com.abs.upapp.assets.service;
+package br.com.abs.upapp.portfolio.service.impl;
 
+import br.com.abs.upapp.assets.mapper.AssetMapper;
 import br.com.abs.upapp.assets.dto.AssetDto;
 import br.com.abs.upapp.assets.entity.Asset;
 import br.com.abs.upapp.assets.exceptions.AssetNotFoundException;
 import br.com.abs.upapp.assets.repository.AssetRepository;
+import br.com.abs.upapp.assets.service.AssetService;
 import br.com.abs.upapp.exceptions.DuplicateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,41 +23,40 @@ public class AssetServiceImpl implements AssetService {
     }
 
     public void create(AssetDto assetDto){
-        checkAssetCodeExists(assetDto.getAssetCode());
-        assetRepository.save(new Asset(assetDto));
+        checkAssetCodeExists(assetDto.assetCode());
+        assetRepository.save(AssetMapper.INSTANCE.dtoToObject(assetDto));
     }
 
     public AssetDto findById(Long idAsset) throws AssetNotFoundException {
         Asset anAsset = assetRepository.findById(idAsset).orElseThrow(() -> new AssetNotFoundException("Ativo id: " + idAsset + " not found"));
-        return new AssetDto(anAsset);
+        return AssetMapper.INSTANCE.objectToDto(anAsset);
     }
 
     @Override
     public AssetDto findByAssetCode(String assetCode) {
         Asset anAsset = assetRepository.findByAssetCode(assetCode).orElseThrow(() -> new AssetNotFoundException("Ativo assetCode: " + assetCode + " not found"));
-        return new AssetDto(anAsset);
+        return AssetMapper.INSTANCE.objectToDto(anAsset);
     }
 
     public List<AssetDto> findAll() {
-        return assetRepository.findAll().stream().map(AssetDto::new).toList();
+        return AssetMapper.INSTANCE.objectToDtos(assetRepository.findAll());
     }
 
     @Override
-    public void update(AssetDto assetDto) {
+    public void update(AssetDto assetDto, Long idAsset) {
 
-        Asset anAsset = assetRepository.findById(assetDto.getId()).orElseThrow(() -> new AssetNotFoundException("Ativo Id: " + assetDto.getId() + " not found"));
+        Asset assetFromDB = assetRepository.findByAssetCode(assetDto.assetCode()).orElseThrow(() -> new AssetNotFoundException("Ativo AssetCode: " + assetDto.assetCode() + " not found"));
 
-        if(!assetDto.getAssetCode().equals(anAsset.getAssetCode())){
-            checkAssetCodeExists(assetDto.getAssetCode());
+        if(!assetDto.assetCode().equals(assetFromDB.getAssetCode())){
+            checkAssetCodeExists(assetDto.assetCode());
         }
 
-        assetDto.setId(anAsset.getId());
-        assetRepository.save(new Asset(assetDto));
+        assetRepository.save(AssetMapper.INSTANCE.dtoToObject(assetDto));
     }
 
     @Override
     public void delete(Long idAsset) throws AssetNotFoundException {
-        Long assetId = findById(idAsset).getId();
+        Long assetId = findById(idAsset).id();
         assetRepository.deleteById(assetId);
     }
 

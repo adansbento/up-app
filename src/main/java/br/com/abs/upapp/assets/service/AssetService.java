@@ -10,5 +10,6 @@ public interface AssetService {
     AssetDto findByAssetCode(String assetCode);
     void delete(Long idAsset);
     List<AssetDto> findAll();
-    void update(AssetDto assetDto);
+    void update(AssetDto assetDto, Long codeAsset);
+
 }

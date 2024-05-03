@@ -8,6 +8,7 @@ spring.datasource:
   url: jdbc:postgresql://localhost:5432/updb
   username: upuser
   password: uppassword
+
 spring:
   sql:
     init:

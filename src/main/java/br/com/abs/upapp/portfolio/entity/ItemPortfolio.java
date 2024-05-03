@@ -1,15 +1,8 @@
 package br.com.abs.upapp.portfolio.entity;
 
 import br.com.abs.upapp.assets.entity.Asset;
-import br.com.abs.upapp.portfolio.dto.ItemPortfolioDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class ItemPortfolio {
 
@@ -27,10 +20,45 @@ public class ItemPortfolio {
     @JoinColumn(name = "asset_code",nullable = false)
     private Asset asset;
 
-    public ItemPortfolio(ItemPortfolioDto itemPortfolioDto) {
-        this.id = itemPortfolioDto.getId();
-        this.amount = itemPortfolioDto.getAmount();
-       // this.portfolio = new Portfolio(itemPortfolioDto.getPortfolio());
-        this.asset = new Asset(itemPortfolioDto.getAsset());
+    public ItemPortfolio(Long id, Integer amount, Portfolio portfolio, Asset asset) {
+        this.id = id;
+        this.amount = amount;
+        this.portfolio = portfolio;
+        this.asset = asset;
+    }
+
+    public ItemPortfolio() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public Portfolio getPortfolio() {
+        return portfolio;
+    }
+
+    public void setPortfolio(Portfolio portfolio) {
+        this.portfolio = portfolio;
+    }
+
+    public Asset getAsset() {
+        return asset;
+    }
+
+    public void setAsset(Asset asset) {
+        this.asset = asset;
     }
 }

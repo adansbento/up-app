@@ -1,17 +1,10 @@
 package br.com.abs.upapp.portfolio.entity;
 
-import br.com.abs.upapp.portfolio.dto.PortfolioDto;
 import br.com.abs.upapp.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Portfolio {
 
@@ -29,13 +22,45 @@ public class Portfolio {
     @OneToMany(mappedBy = "portfolio",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ItemPortfolio> itemPortfolios;
 
-    public Portfolio(PortfolioDto portfolioDto) {
+    public Portfolio(Long id, String description, User owner, List<ItemPortfolio> itemPortfolios) {
+        this.id = id;
+        this.description = description;
+        this.owner = owner;
+        this.itemPortfolios = itemPortfolios;
+    }
 
-        this.id = portfolioDto.getId();
-        this.description = portfolioDto.getDescription();
-        this.owner = new User(portfolioDto.getOwner());
+    public Portfolio() {
+    }
 
-        if(portfolioDto.getItemPortfolios() != null)
-            this.itemPortfolios = portfolioDto.getItemPortfolios().stream().map(ItemPortfolio::new).toList();
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public List<ItemPortfolio> getItemPortfolios() {
+        return itemPortfolios;
+    }
+
+    public void setItemPortfolios(List<ItemPortfolio> itemPortfolios) {
+        this.itemPortfolios = itemPortfolios;
     }
 }

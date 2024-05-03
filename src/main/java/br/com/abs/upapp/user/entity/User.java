@@ -1,17 +1,9 @@
 package br.com.abs.upapp.user.entity;
 
 
-import br.com.abs.upapp.portfolio.dto.OwnerDto;
-import br.com.abs.upapp.user.dto.UserDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity(name = "user-app")
 public class User {
     @Id
@@ -26,16 +18,54 @@ public class User {
     @Column(length = 50)
     private String document;
 
-
-    public User(UserDto userDto) {
-        this.id = userDto.getId();
-        this.name = userDto.getName();
-        this.email = userDto.getEmail();
-        this.profile = userDto.getProfile();
-        this.document = userDto.getDocument();
+    public User() {
     }
 
-    public User(OwnerDto owner)  {
-        this.id = owner.getId();
+    public User(Long id, String name, String email, String profile, String document) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.profile = profile;
+        this.document = document;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
     }
 }
