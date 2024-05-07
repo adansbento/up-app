@@ -26,10 +26,16 @@ public class UserController {
     public void create(@RequestBody UserDto userDto){
         userService.create(userDto);
     }
+    @PutMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@RequestBody UserDto userDto){
+        userService.update(userDto);
+    }
     @GetMapping(path = "{idUser}")
     public UserDto findById(@PathVariable Long idUser) throws UserNotFoundException {
         return userService.findById(idUser);
     }
+
     @DeleteMapping(path = "{idUser}")
     public void delete(@PathVariable  Long idUser) throws UserNotFoundException {
         userService.delete(idUser);

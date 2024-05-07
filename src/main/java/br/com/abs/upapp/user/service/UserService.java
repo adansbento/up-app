@@ -12,4 +12,5 @@ public interface UserService {
     UserDto findById(Long idUser) throws UserNotFoundException;
     List<UserDto> findAll();
     void delete(Long idUser) throws UserNotFoundException;
+    void update(UserDto userDto);
 }

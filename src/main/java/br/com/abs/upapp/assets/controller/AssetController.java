@@ -27,9 +27,9 @@ public class AssetController {
         assetService.create(assetDto);
     }
 
-    @PutMapping(path = "{idAsset}")
-    public void update(@RequestBody AssetDto assetDto,@PathVariable  Long idAsset){
-        assetService.update(assetDto,idAsset);
+    @PutMapping
+    public void update(@RequestBody AssetDto assetDto){
+        assetService.update(assetDto);
     }
 
     @GetMapping(path = "{idAsset}")

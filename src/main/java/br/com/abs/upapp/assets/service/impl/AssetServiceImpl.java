@@ -1,9 +1,9 @@
-package br.com.abs.upapp.portfolio.service.impl;
+package br.com.abs.upapp.assets.service.impl;
 
-import br.com.abs.upapp.assets.mapper.AssetMapper;
 import br.com.abs.upapp.assets.dto.AssetDto;
 import br.com.abs.upapp.assets.entity.Asset;
 import br.com.abs.upapp.assets.exceptions.AssetNotFoundException;
+import br.com.abs.upapp.assets.mapper.AssetMapper;
 import br.com.abs.upapp.assets.repository.AssetRepository;
 import br.com.abs.upapp.assets.service.AssetService;
 import br.com.abs.upapp.exceptions.DuplicateException;
@@ -43,7 +43,7 @@ public class AssetServiceImpl implements AssetService {
     }
 
     @Override
-    public void update(AssetDto assetDto, Long idAsset) {
+    public void update(AssetDto assetDto) {
 
         Asset assetFromDB = assetRepository.findByAssetCode(assetDto.assetCode()).orElseThrow(() -> new AssetNotFoundException("Ativo AssetCode: " + assetDto.assetCode() + " not found"));
 
@@ -62,9 +62,9 @@ public class AssetServiceImpl implements AssetService {
 
     private void checkAssetCodeExists(String assetCode) {
 
-        boolean existsEmail = assetRepository.existsByAssetCode(assetCode);
+        boolean existsByAssetCode = assetRepository.existsByAssetCode(assetCode);
 
-        if(existsEmail){
+        if(existsByAssetCode){
             throw new DuplicateException("Codigo do ativo : "+ assetCode+" já cadastrado");
         }
     }

@@ -1,9 +1,9 @@
-package br.com.abs.upapp.portfolio.service.impl;
+package br.com.abs.upapp.assets.service.impl;
 
 import br.com.abs.upapp.assets.mapper.AssetCodeMapper;
 import br.com.abs.upapp.assets.dto.AssetCodeDto;
 import br.com.abs.upapp.assets.repository.AssetCodeRepository;
-import br.com.abs.upapp.portfolio.service.AssetCodeService;
+import br.com.abs.upapp.assets.service.AssetCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

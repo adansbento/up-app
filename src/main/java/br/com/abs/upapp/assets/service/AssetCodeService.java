@@ -1,4 +1,4 @@
-package br.com.abs.upapp.portfolio.service;
+package br.com.abs.upapp.assets.service;
 
 import br.com.abs.upapp.assets.dto.AssetCodeDto;
 

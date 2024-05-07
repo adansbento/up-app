@@ -6,7 +6,7 @@ import br.com.abs.upapp.integration.brapi.model.IntegrationSupplier;
 import br.com.abs.upapp.integration.brapi.model.ResponseStock;
 import br.com.abs.upapp.integration.util.service.IntegratorService;
 import br.com.abs.upapp.portfolio.entity.TypeAsset;
-import br.com.abs.upapp.portfolio.service.AssetCodeService;
+import br.com.abs.upapp.assets.service.AssetCodeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
