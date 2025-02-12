@@ -8,38 +8,45 @@ import br.com.abs.upapp.user.mapper.UserMapper;
 import br.com.abs.upapp.user.repository.UserRepository;
 import br.com.abs.upapp.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Locale;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final MessageSource messageSource;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, MessageSource messageSource) {
         this.userRepository = userRepository;
+        this.messageSource = messageSource;
     }
 
-    public void create(UserDto userDto){
-
+    public void create(UserDto userDto) {
         boolean existsEmail = userRepository.existsByEmail(userDto.email());
-
-        if(existsEmail){
-            throw new DuplicateException("Email já cadastrado.");
+        if (existsEmail) {
+            String message = messageSource.getMessage("error.email.duplicate", null, Locale.getDefault());
+            throw new DuplicateException(message);
         }
-
         userRepository.save(UserMapper.INSTANCE.userDtoToUser(userDto));
     }
+
     public UserDto findById(Long idUser) throws UserNotFoundException {
-        User user = userRepository.findById(idUser).orElseThrow(() -> new UserNotFoundException("Usuario com id: " + idUser + " não encontrado."));
+        User user = userRepository
+                .findById(idUser)
+                .orElseThrow(() -> {
+                    String message = messageSource.getMessage("error.user.notfound", new Object[]{idUser}, Locale.getDefault());
+                    return new UserNotFoundException(message);
+                });
         return UserMapper.INSTANCE.userToUserDto(user);
     }
 
     public List<UserDto> findAll() {
-       return UserMapper.INSTANCE.userToUserDtos(userRepository.findAll());
+        return UserMapper.INSTANCE.userToUserDtos(userRepository.findAll());
     }
 
     @Override
@@ -50,14 +57,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(UserDto userDto) {
-
         boolean existsEmail = userRepository.existsByEmail(userDto.email());
         UserDto userDtoFromDB = findById(userDto.id());
 
-        if(!userDtoFromDB.email().equals(userDto.email()) && existsEmail){
-            throw new DuplicateException("Email já cadastrado.");
+        if (!userDtoFromDB.email().equals(userDto.email()) && existsEmail) {
+            String message = messageSource.getMessage("error.email.duplicate", null, Locale.getDefault());
+            throw new DuplicateException(message);
         }
         userRepository.save(UserMapper.INSTANCE.userDtoToUser(userDto));
     }
-
 }
